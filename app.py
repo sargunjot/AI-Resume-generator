@@ -5,7 +5,6 @@ import streamlit as st
 st.title("AI Resume Maker")
 st.markdown("""## User can create or download
 AI created Resume based on high ATS score""")
-import IPython as ip
 import os
 import time
 import langchain
@@ -68,8 +67,9 @@ def prompt_generator(agent):
   with open(file_name,'w') as f:
     f.write(response.content[-1]['text'])
   return "prompt file generated successfully,agent can read it"
+    
 
-  
+prompt_generator(model)  
 def resume_maker_prompt():
   """this function just gives
   updated prompt for model"""
@@ -77,6 +77,9 @@ def resume_maker_prompt():
   with open('prompt.py','r') as f:
     prompt = f.read()
   return prompt
+
+
+    resume_maker_prompt()
 
   prompt = """You are a helpful AI assistant
 with job resume maker, your task is to give
@@ -99,4 +102,5 @@ if st.button("Generate Resume"):
 response = agent.invoke({'messages': [{'role': 'user', 'content': query}]})
 code = response['messages'] [-1].content[-1]['text']
 
-st.markdown(code)
+#st.markdown(code)
+st.html(code,width="stretch" , unsafe_allow_javascript=True)
