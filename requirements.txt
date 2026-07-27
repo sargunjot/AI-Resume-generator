@@ -1,5 +1,5 @@
 streamlit
-lanchain
+langchain
 pytesseract
 langchain_groq
 langchain_google_genai
